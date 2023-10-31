@@ -1,0 +1,60 @@
+.logincard {
+  border-radius: 1rem;
+  width: 40rem;
+  height: 40rem;
+  background-color: gainsboro;
+  opacity: 80%;
+  margin: auto;
+  font-family: dosis;
+  box-shadow: 2px 2px 3px rgb(66, 65, 65);
+}
+@font-face {
+  font-family: dosis;
+  src: url("../../../public/fonts/Dosis-Bold.ttf");
+}
+.logincard h2 {
+  font-size: 1.9rem;
+  text-align: center;
+  line-height: 2.5rem;
+  width: 50%;
+  margin-left: 10rem;
+  padding-top: 3rem;
+  color: rgb(111, 110, 110);
+}
+.forma {
+  opacity: 100%;
+  border-radius: 1rem;
+  width: 20rem;
+  height: 20rem;
+  margin: auto;
+  margin-top: 8rem;
+  background-color: white;
+}
+.quote {
+  color: black;
+  font-size: 2.5rem;
+  font-family: dosis;
+}
+.forma input {
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  width: 10rem;
+  height: 2rem;
+  margin-top: 3rem;
+  margin-left: 5rem;
+  padding: auto;
+  font-family: dosis;
+  text-align: center;
+  cursor: pointer;
+}
+.forma button {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 1rem;
+  margin-top: 3rem;
+  width: 8rem;
+  height: 3rem;
+  margin-left: 6rem;
+  font-family: dosis;
+}
