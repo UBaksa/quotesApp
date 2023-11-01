@@ -1,0 +1,52 @@
+.createcard {
+  border-radius: 1rem;
+  width: 40rem;
+  height: 40rem;
+  background-color: rgb(220, 220, 220, 0.8);
+  margin: auto;
+  font-family: dosis;
+  box-shadow: 2px 2px 3px rgb(66, 65, 65);
+}
+.createcard h2 {
+  font-size: 1.9rem;
+  text-align: center;
+  line-height: 2.5rem;
+  width: 50%;
+  margin-left: 10rem;
+  padding-top: 3rem;
+  color: black;
+}
+.cardform {
+  opacity: 100%;
+  border-radius: 1rem;
+  width: 20rem;
+  height: 20rem;
+  margin: auto;
+  margin-top: 8rem;
+  background-color: rgb(227, 226, 226);
+  box-shadow: 2px 2px 2px rgb(106, 105, 105);
+}
+.cardform input {
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  width: 14rem;
+  height: 2rem;
+  margin-top: 2rem;
+  margin-left: 3rem;
+  padding: auto;
+  font-family: dosis;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cardform button {
+  ursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 1rem;
+  margin-top: 3rem;
+  width: 8rem;
+  height: 3rem;
+  margin-left: 6rem;
+  font-family: dosis;
+}
