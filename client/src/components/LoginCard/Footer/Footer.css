@@ -1,0 +1,23 @@
+.footer {
+  width: 100%;
+  height: 10.1vh;
+  background-image: url("../../../../public/photos/svg\ \(1\).png");
+  background-attachment: inherit;
+  background-size: contain;
+}
+@font-face {
+  font-family: dosis;
+  src: url("../../../../public/fonts/Dosis-Bold.ttf");
+}
+.footer p {
+  font-weight: bold;
+  font-size: 2rem;
+  width: 25rem;
+  height: 5rem;
+  margin: auto;
+  padding-top: 1rem;
+  font-family: dosis;
+  background: -webkit-linear-gradient(#f8f8f8, #565656);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

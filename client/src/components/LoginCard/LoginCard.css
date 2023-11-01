@@ -2,8 +2,7 @@
   border-radius: 1rem;
   width: 40rem;
   height: 40rem;
-  background-color: gainsboro;
-  opacity: 80%;
+  background-color: rgb(220, 220, 220, 0.8);
   margin: auto;
   font-family: dosis;
   box-shadow: 2px 2px 3px rgb(66, 65, 65);
@@ -28,7 +27,8 @@
   height: 20rem;
   margin: auto;
   margin-top: 8rem;
-  background-color: white;
+  background-color: rgb(227, 226, 226);
+  box-shadow: 2px 2px 2px rgb(106, 105, 105);
 }
 .quote {
   color: black;
