@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
 import axios from "axios";
+import Header from "../../components/Header/Header";
 
 export default function Main() {
   const { quotes, setQuotes, accessToken } = useContext(AppContext);
@@ -16,24 +17,22 @@ export default function Main() {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
   const quotesPerPage = 4;
-  const [numPages, setNumPages] = useState(
-    Math.ceil(quotes.length / quotesPerPage)
-  );
+  const numPages = Math.ceil(quotes.length / quotesPerPage);
 
   const [selectedQuotes, setSelectedQuotes] = useState([]);
 
-  const handleTag = (e) => {
-    const tag = e.target.value;
-    const isChecked = e.target.checked;
-    if (isChecked) {
-      setSelectedQuotes([...selectedQuotes, tag]);
-      setPage(1);
-    } else {
-      setSelectedQuotes(
-        selectedQuotes.filter((selectedTag) => selectedTag !== tag)
-      );
-    }
-  };
+  // const handleTag = (e) => {
+  //   const tag = e.target.value;
+  //   const isChecked = e.target.checked;
+  //   if (isChecked) {
+  //     setSelectedQuotes([...selectedQuotes, tag]);
+  //     setPage(1);
+  //   } else {
+  //     setSelectedQuotes(
+  //       selectedQuotes.filter((selectedTag) => selectedTag !== tag)
+  //     );
+  //   }
+  // };
 
   useEffect(() => {
     axios
@@ -42,7 +41,7 @@ export default function Main() {
       })
       .then((result) => {
         setQuotes(result.data.quotes);
-        console.log(result.data.quotes[0].upvotesCount);
+        console.log(result.data.quotes[0]);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -56,7 +55,10 @@ export default function Main() {
 
   return (
     <div className="main">
-      <div className="quotess">
+      <div className="top">
+        <Header></Header>
+      </div>
+      <div className="quotes">
         {filteredQuotes
           .map((quote) => {
             return (
@@ -67,7 +69,7 @@ export default function Main() {
                   author={quote.author}
                   downvotesCount={quote.downvotesCount}
                   upvotesCount={quote.upvotesCount}
-                  givenVotee={quote.givenvotes}
+                  givenVotes={quote.givenVote}
                 />
               </div>
             );
@@ -82,7 +84,6 @@ export default function Main() {
             count={numPages}
             page={page}
             onChange={handleChange}
-            color="secondary"
           />
         )}
       </div>

@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import Header from "../Header/Header";
 
 export default function Card({
   id,
@@ -17,9 +18,10 @@ export default function Card({
 }) {
   const [upvotes, setUpVotes] = useState(upvotesCount);
   const [downvotes, setDownVotes] = useState(downvotesCount);
-  const [givenvotes, setGivenVotes] = useState(givenVotes);
-  const { accesToken, token } = useContext(AppContext);
-
+  const [givenvote, setgivenvote] = useState(givenVotes);
+  const accesToken = "yuim98oq-e275-45a2-bc2e-b3098036d655";
+  // const { quotes, setQuotes } = useContext(AppContext);
+  console.log("state:", givenvote);
   function vote(up, down) {
     let output1 = (up / (up + down)) * 100;
     let output2 = output1.toFixed(0);
@@ -58,10 +60,12 @@ export default function Card({
       );
     }
   }
+  // console.log(givenvote, "givnenn");
 
   function like() {
-    if (givenvotes === "none") {
-      console.log(localStorage.getItem("token"));
+    if (givenvote == "none") {
+      console.log("id", id);
+      console.log("TOKE", localStorage.getItem("token"));
       axios
         .post(
           `http://localhost:8000/quotes/${id}/upvote`,
@@ -73,14 +77,15 @@ export default function Card({
           }
         )
         .then((result) => {
-          setGivenVotes("upvote");
-          console.log(result.data);
+          setgivenvote("upvote");
+          console.log("result", result.data);
           setUpVotes(upvotesCount + 1);
+          console.log("uspesan lajk");
         })
         .catch((error) => {
           console.log(error);
         });
-    } else if (givenvotes === "upvote") {
+    } else if (givenvote === "upvote") {
       axios
         .delete(
           `http://localhost:8000/quotes/${id}/upvote`,
@@ -92,14 +97,14 @@ export default function Card({
           }
         )
         .then((result) => {
-          setGivenVotes("none");
+          setgivenvote("none");
           console.log(result.data);
           setUpVotes(upvotesCount - 1);
         })
         .catch((error) => {
           console.log(error);
         });
-    } else if (givenVotes === "downvote") {
+    } else if (givenvote === "downvote") {
       axios
         .delete(
           `http://localhost:8000/quotes/${id}/downvote`,
@@ -129,7 +134,7 @@ export default function Card({
           }
         )
         .then((result) => {
-          setGivenVotes("upvote");
+          setgivenvote("upvote");
           console.log(result.data);
           setUpVotes(upvotesCount + 1);
         })
@@ -140,7 +145,7 @@ export default function Card({
   }
 
   function dislike() {
-    if (givenvotes === "none") {
+    if (givenvote == "none") {
       console.log(localStorage.getItem("token"));
       axios
         .post(
@@ -153,14 +158,14 @@ export default function Card({
           }
         )
         .then((result) => {
-          setGivenVotes("downvote");
+          setgivenvote("downvote");
           console.log(result.data);
           setDownVotes(downvotesCount + 1);
         })
         .catch((error) => {
           console.log(error);
         });
-    } else if (givenvotes === "downvote") {
+    } else if (givenvote === "downvote") {
       axios
         .delete(
           `http://localhost:8000/quotes/${id}/downvote`,
@@ -172,14 +177,14 @@ export default function Card({
           }
         )
         .then((result) => {
-          setGivenVotes("none");
+          setgivenvote("none");
           console.log(result.data);
           setDownVotes(downvotesCount - 1);
         })
         .catch((error) => {
           console.log(error);
         });
-    } else if (givenvotes === "upvote") {
+    } else if (givenvote === "upvote") {
       axios
         .delete(
           `http://localhost:8000/quotes/${id}/upvote`,
@@ -209,7 +214,7 @@ export default function Card({
           }
         )
         .then((result) => {
-          setGivenVotes("downvote");
+          setgivenvote("downvote");
           console.log(result.data);
           setDownVotes(downvotes + 1);
         })
@@ -225,11 +230,11 @@ export default function Card({
     <div className="card">
       <div className="one">
         <ArrowDropUpIcon
-          className={givenvotes === "upvote" ? "active" : "passive"}
-          onClick={() => {
-            like;
-          }}
+          className={givenvote === "upvote" ? "active" : "passive"}
           fontSize="large"
+          onClick={() => {
+            like();
+          }}
         ></ArrowDropUpIcon>
         <h3>{vote(upvotes, downvotes)}</h3>
         <h5>
@@ -237,12 +242,12 @@ export default function Card({
         </h5>
         <ArrowDropDownIcon
           fontSize="large"
-          className={givenvotes === "downvote" ? "active" : "passive"}
-          onClick={() => dislike()}
+          className={givenvote === "downvote" ? "active" : "passive"}
+          onClick={() => like()}
         ></ArrowDropDownIcon>
       </div>
       <div className="second">
-        <h3>{content}</h3>
+        <h3 onClick={() => dislike()}>{content}</h3>
         <h5>{author}</h5>
       </div>
     </div>

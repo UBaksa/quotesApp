@@ -7,6 +7,7 @@
   background-color: rgb(52, 52, 52);
   border-radius: 1rem;
   box-shadow: 2px 2px 2px rgb(72, 72, 72);
+  margin-bottom: 3rem;
 }
 @font-face {
   font-family: dosis;
@@ -35,7 +36,6 @@
   font-size: 1.1rem;
   font-weight: bold;
   color: white;
-  padding-left: 0.5rem;
 }
 .one h3 {
   font-size: 1.5rem;
@@ -55,5 +55,6 @@
 .second h5 {
   margin-left: auto;
   padding: 1rem;
+  margin-top: 0.5rem;
   height: 30%;
 }
