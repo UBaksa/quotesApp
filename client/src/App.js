@@ -5,14 +5,14 @@ import "./App.css";
 import LoginCard from "./components/LoginCard/LoginCard";
 import Footer from "./components/Footer/Footer";
 import CreateCard from "./components/CreateCard/CreateCard";
-import Card from "./components/Card/Card";
+import Main from "./pages/Main/Main";
 
 function App() {
   return (
     <div className="app">
       {/* <LoginCard></LoginCard> */}
       {/* <CreateCard></CreateCard> */}
-      <Card></Card>
+      <Main></Main>
       <Footer></Footer>
     </div>
   );

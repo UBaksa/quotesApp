@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Card.css";
 import axios from "axios";
 import { useState } from "react";
@@ -11,12 +11,12 @@ export default function Card({
   id,
   content,
   author,
-  upVotes,
-  downVotes,
+  upvotesCount,
+  downvotesCount,
   givenVotes,
 }) {
-  const [upvotes, setUpVotes] = useState(upVotes);
-  const [downvotes, setDownVotes] = useState(downVotes);
+  const [upvotes, setUpVotes] = useState(upvotesCount);
+  const [downvotes, setDownVotes] = useState(downvotesCount);
   const [givenvotes, setGivenVotes] = useState(givenVotes);
   const { accesToken, token } = useContext(AppContext);
 
@@ -75,7 +75,7 @@ export default function Card({
         .then((result) => {
           setGivenVotes("upvote");
           console.log(result.data);
-          setUpVotes(upvotes + 1);
+          setUpVotes(upvotesCount + 1);
         })
         .catch((error) => {
           console.log(error);
@@ -94,7 +94,7 @@ export default function Card({
         .then((result) => {
           setGivenVotes("none");
           console.log(result.data);
-          setUpVotes(upVotes - 1);
+          setUpVotes(upvotesCount - 1);
         })
         .catch((error) => {
           console.log(error);
@@ -131,7 +131,7 @@ export default function Card({
         .then((result) => {
           setGivenVotes("upvote");
           console.log(result.data);
-          setUpVotes(upvotes + 1);
+          setUpVotes(upvotesCount + 1);
         })
         .catch((error) => {
           console.log(error);
@@ -155,7 +155,7 @@ export default function Card({
         .then((result) => {
           setGivenVotes("downvote");
           console.log(result.data);
-          setDownVotes(downvotes + 1);
+          setDownVotes(downvotesCount + 1);
         })
         .catch((error) => {
           console.log(error);
@@ -174,7 +174,7 @@ export default function Card({
         .then((result) => {
           setGivenVotes("none");
           console.log(result.data);
-          setDownVotes(downvotes - 1);
+          setDownVotes(downvotesCount - 1);
         })
         .catch((error) => {
           console.log(error);
@@ -192,7 +192,7 @@ export default function Card({
         )
         .then((result) => {
           console.log(result.data);
-          setUpVotes(upvotes - 1);
+          setUpVotes(upvotesCount - 1);
         })
         .catch((err) => {
           console.log(err);
@@ -218,17 +218,23 @@ export default function Card({
         });
     }
   }
-
+  useEffect(() => {
+    console.log(upvotes);
+  }, []);
   return (
     <div className="card">
       <div className="one">
         <ArrowDropUpIcon
           className={givenvotes === "upvote" ? "active" : "passive"}
-          onClick={() => like()}
+          onClick={() => {
+            like;
+          }}
           fontSize="large"
         ></ArrowDropUpIcon>
         <h3>{vote(upvotes, downvotes)}</h3>
-        <h5>{upvotes / downvotes}</h5>
+        <h5>
+          {upvotes} / {downvotes}
+        </h5>
         <ArrowDropDownIcon
           fontSize="large"
           className={givenvotes === "downvote" ? "active" : "passive"}
@@ -236,8 +242,7 @@ export default function Card({
         ></ArrowDropDownIcon>
       </div>
       <div className="second">
-        {/* <h3>{content}</h3> */}
-        <h3>Text</h3>
+        <h3>{content}</h3>
         <h5>{author}</h5>
       </div>
     </div>
