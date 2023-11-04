@@ -20,7 +20,10 @@
   height: 3rem;
   border-radius: 1rem;
 }
-
+.header h1 {
+  color: white;
+  margin-top: 10rem;
+}
 .rightbutton {
   margin-left: 70%;
 }

@@ -3,12 +3,14 @@ import { useState, useContext } from "react";
 import "./LoginCard.css";
 import axios from "axios";
 import { AppContext } from "../../context/AppContext";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginCard() {
   const { setToken, accesToken, token } = useContext(AppContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const logSystem = async () => {
     try {
@@ -19,7 +21,7 @@ export default function LoginCard() {
       const userInfo = await user.data;
       localStorage.setItem("token", userInfo.accessToken);
       setToken(userInfo.accessToken);
-      //   navigation("/quotes");
+      navigate("/quotes");
       console.log(userInfo.accessToken);
       console.log(token);
       console.log(localStorage.getItem("token"));
@@ -36,7 +38,6 @@ export default function LoginCard() {
     logSystem(username, password);
   }
 
-  //   const navigate = useNavigate();
   return (
     <div className="logincard">
       <h2>

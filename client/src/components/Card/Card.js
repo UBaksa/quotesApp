@@ -6,7 +6,6 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import Header from "../Header/Header";
 
 export default function Card({
   id,
