@@ -21,18 +21,18 @@ export default function Main() {
 
   const [selectedQuotes, setSelectedQuotes] = useState([]);
 
-  // const handleTag = (e) => {
-  //   const tag = e.target.value;
-  //   const isChecked = e.target.checked;
-  //   if (isChecked) {
-  //     setSelectedQuotes([...selectedQuotes, tag]);
-  //     setPage(1);
-  //   } else {
-  //     setSelectedQuotes(
-  //       selectedQuotes.filter((selectedTag) => selectedTag !== tag)
-  //     );
-  //   }
-  // };
+  const selected = (e) => {
+    const tag = e.target.value;
+    const isSelected = e.target.checked;
+    if (isSelected) {
+      setSelectedQuotes([...selectedQuotes, tag]);
+      setPage(1);
+    } else {
+      setSelectedQuotes(
+        selectedQuotes.filter((selectedTag) => selectedTag !== tag)
+      );
+    }
+  };
 
   useEffect(() => {
     axios
@@ -49,14 +49,47 @@ export default function Main() {
   const filteredQuotes = quotes.filter((quote) => {
     if (selectedQuotes.length === 0) {
       return true;
+    } else {
+      return quote.tags.some((tag) => selectedQuotes.includes(tag));
     }
-    return quote.tags.some((tag) => selectedQuotes.includes(tag));
   });
 
   return (
     <div className="main">
       <div className="top">
         <Header></Header>
+      </div>
+      <div className="tagnames">
+        <p>Action</p>
+        <p>Books</p>
+        <p>Life</p>
+        <p>Humor</p>
+      </div>
+      <div className="tags">
+        <input
+          type="checkbox"
+          value="action"
+          checked={selectedQuotes.includes("action")}
+          onChange={selected}
+        ></input>
+        <input
+          type="checkbox"
+          value="books"
+          checked={selectedQuotes.includes("books")}
+          onChange={selected}
+        ></input>
+        <input
+          type="checkbox"
+          value="life"
+          checked={selectedQuotes.includes("life")}
+          onChange={selected}
+        ></input>
+        <input
+          type="checkbox"
+          value="humor"
+          checked={selectedQuotes.includes("humor")}
+          onChange={selected}
+        ></input>
       </div>
       <div className="quotes">
         {filteredQuotes

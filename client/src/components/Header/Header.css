@@ -24,6 +24,9 @@
   color: white;
   margin-top: 10rem;
 }
+.leftbutton {
+  margin-left: 10%;
+}
 .rightbutton {
   margin-left: 70%;
 }

@@ -17,10 +17,13 @@ export default function Card({
 }) {
   const [upvotes, setUpVotes] = useState(upvotesCount);
   const [downvotes, setDownVotes] = useState(downvotesCount);
-  const [givenvote, setgivenvote] = useState(givenVotes);
-  const accesToken = "yuim98oq-e275-45a2-bc2e-b3098036d655";
+  const [givenvote, setGivenVote] = useState(givenVotes);
+
+  // const accesToken = "yuim98oq-e275-45a2-bc2e-b3098036d655";
+  const { accesToken, token } = useContext(AppContext);
   // const { quotes, setQuotes } = useContext(AppContext);
   console.log("state:", givenvote);
+
   function vote(up, down) {
     let output1 = (up / (up + down)) * 100;
     let output2 = output1.toFixed(0);
@@ -60,11 +63,9 @@ export default function Card({
     }
   }
   // console.log(givenvote, "givnenn");
-
-  function like() {
-    if (givenvote == "none") {
-      console.log("id", id);
-      console.log("TOKE", localStorage.getItem("token"));
+  const upvote = () => {
+    if (givenvote === "none") {
+      console.log(localStorage.getItem("token"));
       axios
         .post(
           `http://localhost:8000/quotes/${id}/upvote`,
@@ -76,10 +77,8 @@ export default function Card({
           }
         )
         .then((result) => {
-          setgivenvote("upvote");
-          console.log("result", result.data);
-          setUpVotes(upvotesCount + 1);
-          console.log("uspesan lajk");
+          setGivenVote("upvote");
+          setUpVotes(upvotes + 1);
         })
         .catch((error) => {
           console.log(error);
@@ -96,9 +95,9 @@ export default function Card({
           }
         )
         .then((result) => {
-          setgivenvote("none");
-          console.log(result.data);
-          setUpVotes(upvotesCount - 1);
+          setGivenVote("none");
+          setUpVotes(upvotes - 1);
+          console.log(result);
         })
         .catch((error) => {
           console.log(error);
@@ -115,11 +114,11 @@ export default function Card({
           }
         )
         .then((result) => {
-          console.log(result.data);
           setDownVotes(downvotes - 1);
+          console.log(result);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          console.log(error);
         });
 
       axios
@@ -133,18 +132,18 @@ export default function Card({
           }
         )
         .then((result) => {
-          setgivenvote("upvote");
-          console.log(result.data);
-          setUpVotes(upvotesCount + 1);
+          setGivenVote("upvote");
+          setUpVotes(upvotes + 1);
+          console.log(result);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  }
+  };
 
-  function dislike() {
-    if (givenvote == "none") {
+  const downvote = () => {
+    if (givenvote === "none") {
       console.log(localStorage.getItem("token"));
       axios
         .post(
@@ -157,9 +156,9 @@ export default function Card({
           }
         )
         .then((result) => {
-          setgivenvote("downvote");
-          console.log(result.data);
-          setDownVotes(downvotesCount + 1);
+          setGivenVote("downvote");
+          // console.log(result.data);
+          setDownVotes(downvotes + 1);
         })
         .catch((error) => {
           console.log(error);
@@ -176,9 +175,9 @@ export default function Card({
           }
         )
         .then((result) => {
-          setgivenvote("none");
-          console.log(result.data);
-          setDownVotes(downvotesCount - 1);
+          setGivenVote("none");
+          setDownVotes(downvotes - 1);
+          console.log(result);
         })
         .catch((error) => {
           console.log(error);
@@ -195,11 +194,11 @@ export default function Card({
           }
         )
         .then((result) => {
-          console.log(result.data);
-          setUpVotes(upvotesCount - 1);
+          setUpVotes(upvotes - 1);
+          console.log(result);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          console.log(error);
         });
 
       axios
@@ -213,27 +212,23 @@ export default function Card({
           }
         )
         .then((result) => {
-          setgivenvote("downvote");
-          console.log(result.data);
+          setGivenVote("downvote");
           setDownVotes(downvotes + 1);
+          console.log(result);
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  }
-  useEffect(() => {
-    console.log(upvotes);
-  }, []);
+  };
+
   return (
     <div className="card">
       <div className="one">
         <ArrowDropUpIcon
           className={givenvote === "upvote" ? "active" : "passive"}
           fontSize="large"
-          onClick={() => {
-            like();
-          }}
+          onClick={() => upvote()}
         ></ArrowDropUpIcon>
         <h3>{vote(upvotes, downvotes)}</h3>
         <h5>
@@ -242,11 +237,11 @@ export default function Card({
         <ArrowDropDownIcon
           fontSize="large"
           className={givenvote === "downvote" ? "active" : "passive"}
-          onClick={() => like()}
+          onClick={() => downvote()}
         ></ArrowDropDownIcon>
       </div>
       <div className="second">
-        <h3 onClick={() => dislike()}>{content}</h3>
+        <h3>{content}</h3>
         <h5>{author}</h5>
       </div>
     </div>
